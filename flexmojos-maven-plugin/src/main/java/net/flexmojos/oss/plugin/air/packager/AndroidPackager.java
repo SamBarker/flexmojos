@@ -30,26 +30,41 @@ public class AndroidPackager extends BasePackager {
     @Override
     public boolean prepare() throws PackagingException {
         File workDir = request.getWorkDir();
+
         boolean init = !new File(workDir, "lib/android/bin/aapt").exists();
         if(init) {
             super.prepare();
-            copyArtifactToLocation(request.getArtifact("baksmali"), new File(workDir, "lib/android/lib/baksmali.jar"));
-            copyArtifactToLocation(request.getArtifact("smali"), new File(workDir, "lib/android/lib/smali.jar"));
             Artifact adt = request.getArtifact("adt");
-            Artifact androidResources = request.getResolver().resolve(adt.getGroupId(), adt.getArtifactId(),
-                    adt.getVersion(), "android", "zip");
-            if(androidResources != null) {
-                unpackArtifactToLocation(androidResources, workDir);
+
+            Artifact commonResources = request.getResolver().resolve(adt.getGroupId(), adt.getArtifactId(),
+                    adt.getVersion(), "common", "zip");
+            if(commonResources != null) {
+                unpackArtifactToLocation(commonResources, workDir);
 
                 // Some files need to manually be made executable.
                 makeExecutableIfExists(new File(workDir, "bin/adt"));
                 makeExecutableIfExists(new File(workDir, "bin/adt.bat"));
                 makeExecutableIfExists(new File(workDir, "bin/adl"));
                 makeExecutableIfExists(new File(workDir, "bin/adl.exe"));
+            }
+
+            Artifact androidResources = request.getResolver().resolve(adt.getGroupId(), adt.getArtifactId(),
+                    adt.getVersion(), "android", "zip");
+            if(androidResources != null) {
+                unpackArtifactToLocation(androidResources, workDir);
+
+                // Some files need to manually be made executable.
                 makeExecutableIfExists(new File(workDir, "lib/android/bin/aapt"));
                 makeExecutableIfExists(new File(workDir, "lib/android/bin/aapt.exe"));
                 makeExecutableIfExists(new File(workDir, "lib/android/bin/adb"));
                 makeExecutableIfExists(new File(workDir, "lib/android/bin/adb.exe"));
+            }
+
+            Artifact androidRuntime = request.getResolver().resolve("com.adobe.air.runtime", "air",
+                    adt.getVersion(), "android", "zip");
+            File runtimeDir = new File(workDir, "runtimes/air/android");
+            if(androidRuntime != null) {
+                unpackArtifactToLocation(androidRuntime, runtimeDir);
             }
         }
         return init;

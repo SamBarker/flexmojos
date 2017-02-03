@@ -197,22 +197,20 @@ public class PackageAirMojo
         packagingRequest.setClassifier(classifier);
 
         includeFileSets = resources.toArray(new FileSet[resources.size()]);
-        if (includeFileSets != null) {
-            for (FileSet set : includeFileSets) {
-                DirectoryScanner scanner;
-                if (set instanceof Resource) {
-                    scanner = scan((Resource) set);
-                } else {
-                    scanner = scan(set);
-                }
+        for (FileSet set : includeFileSets) {
+            DirectoryScanner scanner;
+            if (set instanceof Resource) {
+                scanner = scan((Resource) set);
+            } else {
+                scanner = scan(set);
+            }
 
-                if (scanner != null) {
-                    File directory = file(set.getDirectory(), project.getBasedir());
+            if (scanner != null) {
+                File directory = file(set.getDirectory(), project.getBasedir());
 
-                    String[] files = scanner.getIncludedFiles();
-                    for (String file : files) {
-                       packagingRequest.addIncludedFile(directory.getAbsolutePath(), file);
-                    }
+                String[] files = scanner.getIncludedFiles();
+                for (String file : files) {
+                   packagingRequest.addIncludedFile(directory.getAbsolutePath(), file);
                 }
             }
         }

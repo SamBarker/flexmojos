@@ -88,9 +88,7 @@ public abstract class BasePackager implements Packager {
                 String path = entries.getKey();
                 commandArgs.add("-C");
                 commandArgs.add(path);
-                for(String file : entries.getValue()) {
-                    commandArgs.add(file);
-                }
+                commandArgs.addAll(entries.getValue());
             }
         }
 

@@ -73,9 +73,9 @@
     </licenses>
 
     <properties>
-        <flex.version>4.14.1</flex.version>
-        <air.version>18.0</air.version>
-        <flash.version>18.0</flash.version>
+        <flex.version>4.15.0</flex.version>
+        <air.version>20.0</air.version>
+        <flash.version>20.0</flash.version>
 
         <commons_io.version>2.4</commons_io.version>
         <maven.version>3.1.1</maven.version>
@@ -162,6 +162,7 @@
                     <version>1.5</version>
                     <executions>
                         <execution>
+                            <phase>process-classes</phase>
                             <goals>
                                 <goal>inherit</goal>
                             </goals>
@@ -213,7 +214,7 @@
                     <configuration>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <tagNameFormat>flexmojos-@{project.version}</tagNameFormat>
-						<mavenExecutorId>forked-path</mavenExecutorId>
+						            <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -419,8 +420,8 @@
                     <plugin>
                      	<artifactId>maven-release-plugin</artifactId>
                         <version>2.5.3</version>
-                     	<configuration>
-                     	    <preparationGoals>clean verify</preparationGoals>
+                     	  <configuration>
+                            <preparationGoals>clean verify</preparationGoals>
                         </configuration>
                     </plugin>
                     <plugin>
