@@ -399,11 +399,27 @@
 
     <profiles>
         <profile>
-            <id>release-profile</id>
-
+            <id>build-plugin</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <modules>
+                <module>flexmojos-util</module>
+                <module>flexmojos-sandbox</module>
+                <module>flexmojos-generator</module>
+                <module>flexmojos-maven-plugin</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>build-framework</id>
+            <modules>
+                <module>flexmojos-testing</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>release-profile</id>
 
             <modules>
                 <module>flexmojos-util</module>

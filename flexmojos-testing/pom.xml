@@ -32,27 +32,9 @@
 
     <name>Flexmojos Testing</name>
 
-    <profiles>
-        <profile>
-            <id>minimal</id>
-
-            <modules>
-                <module>flexmojos-tester</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>release</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
-            <modules>
-                <module>flexmojos-tester</module>
-                <module>flexmojos-unittest</module>
-                <module>flexmojos-test-harness</module>
-            </modules>
-        </profile>
-    </profiles>
+    <modules>
+        <module>flexmojos-unittest</module>
+        <module>flexmojos-test-harness</module>
+    </modules>
 
 </project>
