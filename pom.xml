@@ -42,25 +42,47 @@
 
     <distributionManagement>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <id>releases</id>
+            <url>http://build.mahifx.com/nexus/content/repositories/thirdparty</url>
         </repository>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>thirdpartysnapshots</id>
+            <url>http://build.mahifx.com/nexus/content/repositories/thirdpartysnapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
     <repositories>
         <repository>
-            <id>rso</id>
-            <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+            <id>releases</id>
+            <url>http://build.mahifx.com/nexus/content/repositories/thirdparty</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <id>rso</id>
-            <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+            <id>releases</id>
+            <url>http://build.mahifx.com/nexus/content/repositories/thirdparty</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>thirdpartysnapshots</id>
+            <url>http://build.mahifx.com/nexus/content/repositories/thirdpartysnapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </pluginRepository>
     </pluginRepositories>
 

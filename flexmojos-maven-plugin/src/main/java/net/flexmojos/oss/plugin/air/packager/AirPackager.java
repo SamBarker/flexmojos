@@ -60,14 +60,15 @@ public class AirPackager extends BasePackager {
         adtArgs.add(request.getStorepass());
         adtArgs.add("-keypass");
         adtArgs.add(request.getStorepass());
-        adtArgs.add(request.getOutputFile().getAbsolutePath());
-        adtArgs.add(request.getDescriptorFile().getAbsolutePath());
-        adtArgs.add(request.getInputFile().getName());
         final Optional<String> timeStampServerUrl = request.getTimeStampServerUrl();
         if (timeStampServerUrl.isPresent()) {
             adtArgs.add("-tsa");
             adtArgs.add(timeStampServerUrl.get());
         }
+        adtArgs.add(request.getOutputFile().getAbsolutePath());
+        adtArgs.add(request.getDescriptorFile().getAbsolutePath());
+        adtArgs.add(request.getInputFile().getName());
+
         runAdt(adtArgs);
 
         if (!outputFile.exists()) {
