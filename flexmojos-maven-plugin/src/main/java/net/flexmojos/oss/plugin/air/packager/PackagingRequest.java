@@ -49,6 +49,8 @@ public class PackagingRequest {
 
     protected Map<String, List<String>> includedFiles;
 
+    protected Optional<String> timeStampServerUrl;
+
     public Log getLog() {
         return log;
     }
@@ -219,5 +221,13 @@ public class PackagingRequest {
 
     public Map<String, List<String>> getIncludedFiles() {
         return includedFiles;
+    }
+
+    public void setTimeStampServerUrl(String timeStampServerUrl) {
+        this.timeStampServerUrl = Optional.ofNullable(timeStampServerUrl);
+    }
+
+    public Optional<String> getTimeStampServerUrl() {
+        return timeStampServerUrl;
     }
 }

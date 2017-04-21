@@ -128,6 +128,13 @@ public class PackageAirMojo
     private String storetype;
 
     /**
+     * The timing server to use for package signing.
+     *
+     * @parameter
+     */
+    private String timestampServerUrl;
+
+    /**
      * Path to the provisioning profile document.
      *
      * @parameter
@@ -222,6 +229,7 @@ public class PackageAirMojo
         packagingRequest.setStorefile(storefile);
         packagingRequest.setStoretype(storetype);
         packagingRequest.setStorepass(storepass);
+        packagingRequest.setTimeStampServerUrl(timestampServerUrl);
 
         packagingRequest.setIosProvisioningProfile(iosProvisioningProfile);
         packagingRequest.setIosPlatformSdk(iosPlatformSdk);

@@ -22,6 +22,7 @@ import org.codehaus.plexus.component.annotations.Component;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component(role = net.flexmojos.oss.plugin.air.packager.Packager.class, hint = "air")
 public class AirPackager extends BasePackager {
@@ -46,7 +47,7 @@ public class AirPackager extends BasePackager {
     @Override
     public File execute() throws PackagingException {
         File outputFile = new File(request.getBuildDir(), request.getFinalName() +
-                ((request.getClassifier() != null) ? "-" + request.getClassifier() : "")  +".air");
+                ((request.getClassifier() != null) ? "-" + request.getClassifier() : "") + ".air");
         request.setOutputFile(outputFile);
 
         List<String> adtArgs = new ArrayList<String>();
@@ -62,9 +63,14 @@ public class AirPackager extends BasePackager {
         adtArgs.add(request.getOutputFile().getAbsolutePath());
         adtArgs.add(request.getDescriptorFile().getAbsolutePath());
         adtArgs.add(request.getInputFile().getName());
+        final Optional<String> timeStampServerUrl = request.getTimeStampServerUrl();
+        if (timeStampServerUrl.isPresent()) {
+            adtArgs.add("-tsa");
+            adtArgs.add(timeStampServerUrl.get());
+        }
         runAdt(adtArgs);
 
-        if(!outputFile.exists()) {
+        if (!outputFile.exists()) {
             throw new PackagingException("Output file does not exist " + outputFile.getAbsolutePath());
         }
 
